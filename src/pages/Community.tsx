@@ -88,7 +88,7 @@ const Community: React.FC = () => {
   const [filteredProjects, setFilteredProjects] = useState<ProjectShare[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-  
+
   useEffect(() => {
     // Simulate fetching data from API
     const fetchProjects = async () => {
@@ -96,14 +96,14 @@ const Community: React.FC = () => {
       setProjects(mockProjects);
       setFilteredProjects(mockProjects);
     };
-    
+
     fetchProjects();
   }, []);
-  
+
   useEffect(() => {
     // Apply filters
     let result = projects;
-    
+
     // Apply search filter
     if (searchQuery) {
       result = result.filter(
@@ -112,14 +112,14 @@ const Community: React.FC = () => {
           project.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
+
     // Apply other filters
     switch (selectedFilter) {
       case 'trending':
         result = [...result].sort((a, b) => b.likes + b.comments - (a.likes + a.comments));
         break;
       case 'recent':
-        result = [...result].sort((a, b) => 
+        result = [...result].sort((a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
         break;
@@ -129,20 +129,20 @@ const Community: React.FC = () => {
       default:
         break;
     }
-    
+
     setFilteredProjects(result);
   }, [searchQuery, selectedFilter, projects]);
-  
+
   const getUserById = (userId: string) => {
     return mockUsers[userId as keyof typeof mockUsers];
   };
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col space-y-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Comunidad</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Comunidad</h1>
             <p className="text-gray-500 mt-1">
               Explora, comparte y aprende de los proyectos de otros estudiantes.
             </p>
@@ -154,7 +154,7 @@ const Community: React.FC = () => {
             </Button>
           </div>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 items-center">
           <div className="relative flex-grow">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -168,7 +168,7 @@ const Community: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
+
           <div className="flex items-center space-x-2 overflow-x-auto whitespace-nowrap pb-1 w-full sm:w-auto">
             <Filter className="h-4 w-4 text-gray-500" />
             {filters.map(filter => (
@@ -179,14 +179,14 @@ const Community: React.FC = () => {
                   selectedFilter === filter.id
                     ? 'bg-indigo-100 text-indigo-800 font-medium'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {filter.name}
               </button>
             ))}
           </div>
         </div>
-        
+
         {selectedFilter === 'trending' && (
           <div className="bg-gradient-to-r from-amber-50 to-amber-100 p-4 rounded-lg border border-amber-200 flex items-start">
             <div className="bg-amber-100 p-2 rounded-full mr-3">
@@ -200,13 +200,13 @@ const Community: React.FC = () => {
             </div>
           </div>
         )}
-        
+
         {filteredProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project) => (
-              <ProjectCard 
-                key={project.id} 
-                project={project} 
+              <ProjectCard
+                key={project.id}
+                project={project}
                 user={getUserById(project.userId)}
               />
             ))}
@@ -220,8 +220,8 @@ const Community: React.FC = () => {
             <p className="text-gray-500 text-sm mb-4">
               Intenta con otra búsqueda o sé el primero en compartir un proyecto.
             </p>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => {
                 setSearchQuery('');
                 setSelectedFilter('all');

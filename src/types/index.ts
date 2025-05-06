@@ -48,6 +48,10 @@ export interface Achievement {
   imageUrl: string;
   points: number;
   earnedAt?: string;
+  courseId?: string;
+  comments?: number;
+  shares?: number;
+  completedAt?: string;
 }
 
 export interface UserProgress {
