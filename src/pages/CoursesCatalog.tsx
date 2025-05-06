@@ -103,7 +103,7 @@ const CoursesCatalog: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
-  
+
   useEffect(() => {
     // Simulate fetching data from API
     const fetchCourses = async () => {
@@ -111,14 +111,14 @@ const CoursesCatalog: React.FC = () => {
       setCourses(mockCourses);
       setFilteredCourses(mockCourses);
     };
-    
+
     fetchCourses();
   }, []);
-  
+
   useEffect(() => {
     // Apply filters
     let result = courses;
-    
+
     // Apply search filter
     if (searchQuery) {
       result = result.filter(
@@ -127,34 +127,34 @@ const CoursesCatalog: React.FC = () => {
           course.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
+
     // Apply category filter
     if (selectedCategory !== 'all') {
       result = result.filter(course => course.category === selectedCategory);
     }
-    
+
     // Apply level filter
     if (selectedLevel !== 'all') {
       result = result.filter(course => course.level === selectedLevel);
     }
-    
+
     setFilteredCourses(result);
   }, [searchQuery, selectedCategory, selectedLevel, courses]);
-  
+
   const toggleFilters = () => {
     setShowFilters(!showFilters);
   };
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Explora Cursos</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Cursos</h1>
           <p className="text-gray-500 mt-1">
             Descubre cursos para adquirir nuevas habilidades y avanzar en tu carrera.
           </p>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 items-center">
           <div className="relative flex-grow">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -168,7 +168,7 @@ const CoursesCatalog: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
+
           <button
             onClick={toggleFilters}
             className="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
@@ -177,7 +177,7 @@ const CoursesCatalog: React.FC = () => {
             Filtros
           </button>
         </div>
-        
+
         {showFilters && (
           <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -192,14 +192,14 @@ const CoursesCatalog: React.FC = () => {
                         selectedCategory === category.id
                           ? 'bg-indigo-100 text-indigo-800 font-medium'
                           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                      }`}
+                        }`}
                     >
                       {category.name}
                     </button>
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="text-sm font-medium text-gray-700 mb-2">Nivel</h3>
                 <div className="flex flex-wrap gap-2">
@@ -211,7 +211,7 @@ const CoursesCatalog: React.FC = () => {
                         selectedLevel === level.id
                           ? 'bg-indigo-100 text-indigo-800 font-medium'
                           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                      }`}
+                        }`}
                     >
                       {level.name}
                     </button>
@@ -221,7 +221,7 @@ const CoursesCatalog: React.FC = () => {
             </div>
           </div>
         )}
-        
+
         {filteredCourses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (
@@ -237,8 +237,8 @@ const CoursesCatalog: React.FC = () => {
             <p className="text-gray-500 text-sm mb-4">
               Intenta con otra búsqueda o elimina algunos filtros.
             </p>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');

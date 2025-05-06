@@ -7,6 +7,7 @@ import CoursesCatalog from './pages/CoursesCatalog';
 import Community from './pages/Community';
 import { SignInPage } from './pages/SignIn';
 import { SignUpPage } from './pages/SignUp';
+import Achievements from './pages/Achievements';
 
 function App() {
   // Mock authenticated state - in a real app, this would come from Supabase auth
@@ -30,6 +31,7 @@ function App() {
               <Route path="/community" element={<Community />} />
               <Route path="/signin" element={<SignInPage />} />
               <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/achievements" element={<Achievements />} />
               {/* Additional routes would be added here */}
             </Routes>
           </main>
