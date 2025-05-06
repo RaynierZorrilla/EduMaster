@@ -66,7 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, user }) => {
             {isAuthenticated ? (
               <>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600 dark:text-gray-300">Hola, {user?.userfirstname}, {user?.userlastname}</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">Hola, {user?.userfirstname} {user?.userlastname}</span>
                 </div>
               </>
             ) : (
