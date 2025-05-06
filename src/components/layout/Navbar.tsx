@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { Menu, X, Bell, ChevronDown, User, BookOpen, Trophy, MessageSquare, LogOut} from 'lucide-react';
 import Button from '../ui/Button';
 import Avatar from '../ui/Avatar';
 import ThemeToggle from '../ui/ThemeToggle';
+import { logoutUser } from '../../services/auth';
 
 interface NavbarProps {
   isAuthenticated: boolean;
   user?: {
     username: string;
+    userfirstname: string;
+    userlastname: string;
     avatarUrl?: string;
   };
 }
@@ -16,6 +19,8 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, user }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const Navigate = useNavigate();
+  
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -24,6 +29,16 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, user }) => {
   const toggleProfileMenu = () => {
     setProfileMenuOpen(!profileMenuOpen);
   };
+
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("¿Estás seguro de que quieres cerrar sesión?");
+    if (confirmLogout) {
+      Navigate("/signin");
+      logoutUser();
+    }
+  };
+
   
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
@@ -45,6 +60,25 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, user }) => {
                 Logros
               </Link>
             </div>
+          </div>
+
+          <div className="hidden md:flex items-center gap-4">
+            {isAuthenticated ? (
+              <>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600 dark:text-gray-300">Hola, {user?.userfirstname}, {user?.userlastname}</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link to="/signin">
+                  <Button variant="outline">Iniciar Sesión</Button>
+                </Link>
+                <Link to="/signup">
+                  <Button>Registrarse</Button>
+                </Link>
+              </>
+            )}
           </div>
           
           <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
@@ -92,10 +126,10 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, user }) => {
                         <MessageSquare className="h-4 w-4 mr-2" />
                         Mensajes
                       </Link>
-                      <Link to="/logout" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center">
+                      <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center">
                         <LogOut className="h-4 w-4 mr-2" />
                         Cerrar Sesión
-                      </Link>
+                      </button>
                     </div>
                   )}
                 </div>

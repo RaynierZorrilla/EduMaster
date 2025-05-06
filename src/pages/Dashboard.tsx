@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
       <div className="flex flex-col space-y-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Bienvenido de vuelta, Miguel</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Bienvenido de vuelta, Miguel</h1>
             <p className="text-gray-500 mt-1">
               Continúa aprendiendo desde donde lo dejaste.
             </p>
@@ -163,7 +163,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="mt-6 md:mt-0">
               <Link to="/community/share">
-                <Button size="lg" className="bg-white text-indigo-600 hover:bg-indigo-50">
+                <Button size="lg" className="dark:text-white text-indigo-600 hover:bg-indigo-50">
                   Compartir Proyecto
                 </Button>
               </Link>
